@@ -56,3 +56,4 @@ D:\ramy\Software\Liberary-System\obj\Debug\net8.0-windows\refint\LibraryManageme
 D:\ramy\Software\Liberary-System\obj\Debug\net8.0-windows\LibraryManagementSystem.pdb
 D:\ramy\Software\Liberary-System\obj\Debug\net8.0-windows\LibraryManagementSystem.genruntimeconfig.cache
 D:\ramy\Software\Liberary-System\obj\Debug\net8.0-windows\ref\LibraryManagementSystem.dll
+D:\ramy\Software\Liberary-System\obj\Debug\net8.0-windows\LibraryManagementSystem.sourcelink.json
