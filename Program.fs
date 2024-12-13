@@ -1,7 +1,6 @@
 ﻿open System
 open System.Windows.Forms
 
-
 // Book record type
 type Book =
     { Title: string
@@ -11,10 +10,8 @@ type Book =
       BorrowDate: DateTime option
       Borrower: string }
 
-
 // Initialize the library's book collection as a mutable map
 let mutable libraryBooks = Map.empty<string, Book>
-
 
 // Refresh all books in a DataGridView
 let displayBooks (dataGridView: DataGridView) =
@@ -23,14 +20,18 @@ let displayBooks (dataGridView: DataGridView) =
     libraryBooks
     |> Map.iter (fun _ book ->
         let status = if book.IsBorrowed then "Borrowed" else "Available"
+        let borrowDate = 
+            match book.BorrowDate with
+            | Some date -> date.ToShortDateString()
+            | None -> ""
+
         let row = dataGridView.Rows.Add()
         dataGridView.Rows.[row].Cells.["Title"].Value <- book.Title
         dataGridView.Rows.[row].Cells.["Author"].Value <- book.Author
         dataGridView.Rows.[row].Cells.["Genre"].Value <- book.Genre
         dataGridView.Rows.[row].Cells.["Status"].Value <- status
-        dataGridView.Rows.[row].Cells.["Borrower"].Value <- book.Borrower)
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        dataGridView.Rows.[row].Cells.["Borrower"].Value <- book.Borrower
+        dataGridView.Rows.[row].Cells.["Borrow Date"].Value <- borrowDate)
 
 // Add a new book
 let addBook title author genre =
@@ -53,8 +54,6 @@ let addBook title author genre =
 
         MessageBox.Show("Book added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
         |> ignore
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 // Search for a book
 let searchBook title =
@@ -72,8 +71,6 @@ let searchBook title =
     | None ->
         MessageBox.Show("Book not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         |> ignore
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 // Borrow a book
 let borrowBook title borrower =
@@ -95,19 +92,6 @@ let borrowBook title borrower =
     | None -> 
         MessageBox.Show("Book not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         |> ignore
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-let deleteBook title =
-    if libraryBooks.ContainsKey(title) then
-        libraryBooks <- libraryBooks.Remove(title)
-        MessageBox.Show("Book deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        |> ignore
-    else
-        MessageBox.Show("Book not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        |> ignore
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 // Return a book
 let returnBook title =
@@ -129,8 +113,16 @@ let returnBook title =
     | None -> 
         MessageBox.Show("Book not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         |> ignore
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Delete a book
+let deleteBook title =
+    if libraryBooks.ContainsKey(title) then
+        libraryBooks <- libraryBooks.Remove(title)
+        MessageBox.Show("Book deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        |> ignore
+    else
+        MessageBox.Show("Book not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        |> ignore
 
 // Windows Forms UI
 let form = new Form(Text = "Library Management System", Width = 600, Height = 600)
@@ -139,7 +131,6 @@ let form = new Form(Text = "Library Management System", Width = 600, Height = 60
 let titleLabel = new Label(Text = "Title:", Top = 20, Left = 20)
 let authorLabel = new Label(Text = "Author:", Top = 60, Left = 20)
 let genreLabel = new Label(Text = "Genre:", Top = 100, Left = 20)
-
 
 let authorInput = new TextBox(Top = 60, Left = 120, Width = 200)
 let titleInput = new TextBox(Top = 20, Left = 120, Width = 200)
@@ -156,41 +147,36 @@ let deleteButton = new Button(Text = "Delete", Top = 150, Left = 120)
 let searchInput = new TextBox(Top = 150, Left = 320, Width = 150)
 let searchButton = new Button(Text = "Search", Top = 150, Left = 483)
 
-
 // DataGridView for displaying books
 let dataGridView = new DataGridView(Top = 190, Left = 20, Width = 540, Height = 300)
-dataGridView.ColumnCount <- 5
+dataGridView.ColumnCount <- 6
 dataGridView.Columns.[0].Name <- "Title"
 dataGridView.Columns.[1].Name <- "Author"
 dataGridView.Columns.[2].Name <- "Genre"
 dataGridView.Columns.[3].Name <- "Borrower"
-dataGridView.Columns.[4].Name <- "Status"
-
+dataGridView.Columns.[4].Name <- "Borrow Date"
 
 // Event Handlers
-dataGridView.CellClick.Add(fun args ->
-    if args.RowIndex >= 0 then
-        let row = dataGridView.Rows.[args.RowIndex]
-        if row.Cells.["Title"].Value <> null then
-            titleInput.Text <- row.Cells.["Title"].Value.ToString()
-        else
-            titleInput.Text <- ""
+dataGridView.CellClick.Add(fun e ->
+    if e.RowIndex >= 0 then
+        let selectedRow = dataGridView.Rows.[e.RowIndex]
+        titleInput.Text <- selectedRow.Cells.["Title"].Value.ToString()
+        authorInput.Text <- selectedRow.Cells.["Author"].Value.ToString()
+        genreInput.Text <- selectedRow.Cells.["Genre"].Value.ToString()
         
-        if row.Cells.["Author"].Value <> null then
-            authorInput.Text <- row.Cells.["Author"].Value.ToString()
-        else
-            authorInput.Text <- ""
-        
-        if row.Cells.["Genre"].Value <> null then
-            genreInput.Text <- row.Cells.["Genre"].Value.ToString()
-        else
-            genreInput.Text <- ""
+        // Fill Borrower and Borrow Date if available
+        borrowerInput.Text <- 
+            if selectedRow.Cells.["Borrower"].Value <> null then
+                selectedRow.Cells.["Borrower"].Value.ToString()
+            else ""
 
-        if row.Cells.["Borrower"].Value <> null then
-            borrowerInput.Text <- row.Cells.["Borrower"].Value.ToString()
-        else
-            borrowerInput.Text <- ""
+        // Optionally, handle Borrow Date
+        let borrowDateValue = selectedRow.Cells.["Borrow Date"].Value
+        if borrowDateValue <> null && not (String.IsNullOrWhiteSpace(borrowDateValue.ToString())) then
+            // Additional logic if needed
+            ()
 )
+
 addButton.Click.Add(fun _ ->
     addBook titleInput.Text authorInput.Text genreInput.Text
     displayBooks dataGridView
@@ -208,7 +194,6 @@ deleteButton.Click.Add(fun _ ->
     deleteBook titleInput.Text
     displayBooks dataGridView
 )
-
 
 // Add UI Elements to the Form
 form.Controls.AddRange(
@@ -228,7 +213,6 @@ form.Controls.AddRange(
        searchInput
        dataGridView |]
 )
-
 
 // Run the Application
 [<EntryPoint>]
