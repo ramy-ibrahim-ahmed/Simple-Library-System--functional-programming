@@ -57,3 +57,33 @@ D:\ramy\Software\Liberary-System\obj\Debug\net8.0-windows\LibraryManagementSyste
 D:\ramy\Software\Liberary-System\obj\Debug\net8.0-windows\LibraryManagementSystem.genruntimeconfig.cache
 D:\ramy\Software\Liberary-System\obj\Debug\net8.0-windows\ref\LibraryManagementSystem.dll
 D:\ramy\Software\Liberary-System\obj\Debug\net8.0-windows\LibraryManagementSystem.sourcelink.json
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\bin\Debug\net8.0-windows\LibraryManagementSystem.exe
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\bin\Debug\net8.0-windows\LibraryManagementSystem.deps.json
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\bin\Debug\net8.0-windows\LibraryManagementSystem.runtimeconfig.json
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\bin\Debug\net8.0-windows\LibraryManagementSystem.dll
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\bin\Debug\net8.0-windows\LibraryManagementSystem.pdb
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\bin\Debug\net8.0-windows\FSharp.Core.dll
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\bin\Debug\net8.0-windows\cs\FSharp.Core.resources.dll
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\bin\Debug\net8.0-windows\de\FSharp.Core.resources.dll
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\bin\Debug\net8.0-windows\es\FSharp.Core.resources.dll
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\bin\Debug\net8.0-windows\fr\FSharp.Core.resources.dll
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\bin\Debug\net8.0-windows\it\FSharp.Core.resources.dll
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\bin\Debug\net8.0-windows\ja\FSharp.Core.resources.dll
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\bin\Debug\net8.0-windows\ko\FSharp.Core.resources.dll
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\bin\Debug\net8.0-windows\pl\FSharp.Core.resources.dll
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\bin\Debug\net8.0-windows\pt-BR\FSharp.Core.resources.dll
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\bin\Debug\net8.0-windows\ru\FSharp.Core.resources.dll
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\bin\Debug\net8.0-windows\tr\FSharp.Core.resources.dll
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\bin\Debug\net8.0-windows\zh-Hans\FSharp.Core.resources.dll
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\bin\Debug\net8.0-windows\zh-Hant\FSharp.Core.resources.dll
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\obj\Debug\net8.0-windows\LibraryManagementSystem.fsproj.AssemblyReference.cache
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\obj\Debug\net8.0-windows\LibraryManagementSystem.AssemblyInfoInputs.cache
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\obj\Debug\net8.0-windows\LibraryManagementSystem.AssemblyInfo.fs
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\obj\Debug\net8.0-windows\LibraryManagementSystem.fsproj.CoreCompileInputs.cache
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\obj\Debug\net8.0-windows\LibraryManagementSystem.sourcelink.json
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\obj\Debug\net8.0-windows\LibraryM.4D120A8C.Up2Date
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\obj\Debug\net8.0-windows\LibraryManagementSystem.dll
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\obj\Debug\net8.0-windows\refint\LibraryManagementSystem.dll
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\obj\Debug\net8.0-windows\LibraryManagementSystem.pdb
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\obj\Debug\net8.0-windows\LibraryManagementSystem.genruntimeconfig.cache
+C:\college\4-Senior year\first term\PL3\project\Simple-Library-System--functional-programming\obj\Debug\net8.0-windows\ref\LibraryManagementSystem.dll

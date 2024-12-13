@@ -74,24 +74,28 @@ let searchBook title =
 
 // Borrow a book
 let borrowBook title borrower =
-    match libraryBooks.TryFind title with
-    | Some book when not book.IsBorrowed ->
-        let updatedBook =
-            { book with
-                IsBorrowed = true
-                BorrowDate = Some DateTime.Now
-                Borrower = borrower }
+    if String.IsNullOrWhiteSpace(borrower) then
+        MessageBox.Show("Please provide a borrower's name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        |> ignore
+    else
+        match libraryBooks.TryFind title with
+        | Some book when not book.IsBorrowed ->
+            let updatedBook =
+                { book with
+                    IsBorrowed = true
+                    BorrowDate = Some DateTime.Now
+                    Borrower = borrower }
 
-        libraryBooks <- libraryBooks.Add(title, updatedBook)
+            libraryBooks <- libraryBooks.Add(title, updatedBook)
 
-        MessageBox.Show("Book borrowed successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        |> ignore
-    | Some _ -> 
-        MessageBox.Show("The book is already borrowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        |> ignore
-    | None -> 
-        MessageBox.Show("Book not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        |> ignore
+            MessageBox.Show("Book borrowed successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            |> ignore
+        | Some _ -> 
+            MessageBox.Show("The book is already borrowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            |> ignore
+        | None -> 
+            MessageBox.Show("Book not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            |> ignore
 
 // Return a book
 let returnBook title =
@@ -134,7 +138,7 @@ let genreLabel = new Label(Text = "Genre:", Top = 100, Left = 20)
 
 let authorInput = new TextBox(Top = 60, Left = 120, Width = 200)
 let titleInput = new TextBox(Top = 20, Left = 120, Width = 200)
-let genreInput = new TextBox(Top = 100, Left = 120, Width = 200)
+let genreInput = new TextBox(Top = 100, Left = 200, Width = 200)
 
 let borrowerLabel = new Label(Text = "Borrower:", Top = 510, Left = 20)
 let borrowerInput = new TextBox(Top = 510, Left = 120, Width = 200)
@@ -156,6 +160,7 @@ dataGridView.Columns.[2].Name <- "Genre"
 dataGridView.Columns.[3].Name <- "Borrower"
 dataGridView.Columns.[4].Name <- "Borrow Date"
 dataGridView.Columns.[5].Name <- "Status"
+dataGridView.AllowUserToAddRows <- false // Disable blank row
 
 // Event Handlers
 addButton.Click.Add(fun _ ->
@@ -177,7 +182,7 @@ deleteButton.Click.Add(fun _ ->
 )
 
 dataGridView.CellClick.Add(fun e ->
-    if e.RowIndex >= 0 then
+    if e.RowIndex >= 0 && e.RowIndex < dataGridView.Rows.Count then // Ensure it's not a blank row
         let selectedRow = dataGridView.Rows.[e.RowIndex]
         titleInput.Text <- selectedRow.Cells.["Title"].Value.ToString()
         authorInput.Text <- selectedRow.Cells.["Author"].Value.ToString()
@@ -189,34 +194,16 @@ dataGridView.CellClick.Add(fun e ->
                 selectedRow.Cells.["Borrower"].Value.ToString()
             else ""
 
-        // Optionally, handle Borrow Date
         let borrowDateValue = selectedRow.Cells.["Borrow Date"].Value
         if borrowDateValue <> null && not (String.IsNullOrWhiteSpace(borrowDateValue.ToString())) then
-            // Additional logic if needed
             ()
 )
 
-
-// Add UI Elements to the Form
 form.Controls.AddRange(
-    [| titleLabel
-       titleInput
-       authorLabel
-       authorInput
-       genreLabel
-       genreInput
-       borrowerLabel
-       borrowerInput
-       addButton
-       searchButton
-       borrowButton
-       deleteButton
-       returnButton
-       searchInput
-       dataGridView |]
-)
+    [| titleLabel; titleInput; authorLabel; authorInput; genreLabel; genreInput; 
+       borrowerLabel; borrowerInput; addButton; deleteButton; 
+       searchInput; searchButton; borrowButton; returnButton; dataGridView |])
 
-// Run the Application
 [<EntryPoint>]
 let main _ =
     Application.Run(form)
