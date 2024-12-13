@@ -155,8 +155,27 @@ dataGridView.Columns.[1].Name <- "Author"
 dataGridView.Columns.[2].Name <- "Genre"
 dataGridView.Columns.[3].Name <- "Borrower"
 dataGridView.Columns.[4].Name <- "Borrow Date"
+dataGridView.Columns.[5].Name <- "Status"
 
 // Event Handlers
+addButton.Click.Add(fun _ ->
+    addBook titleInput.Text authorInput.Text genreInput.Text
+    displayBooks dataGridView
+)
+borrowButton.Click.Add(fun _ ->
+    borrowBook titleInput.Text borrowerInput.Text
+    displayBooks dataGridView
+)
+returnButton.Click.Add(fun _ ->
+    returnBook titleInput.Text
+    displayBooks dataGridView
+)
+searchButton.Click.Add(fun _ -> searchBook searchInput.Text)
+deleteButton.Click.Add(fun _ ->
+    deleteBook titleInput.Text
+    displayBooks dataGridView
+)
+
 dataGridView.CellClick.Add(fun e ->
     if e.RowIndex >= 0 then
         let selectedRow = dataGridView.Rows.[e.RowIndex]
@@ -177,23 +196,6 @@ dataGridView.CellClick.Add(fun e ->
             ()
 )
 
-addButton.Click.Add(fun _ ->
-    addBook titleInput.Text authorInput.Text genreInput.Text
-    displayBooks dataGridView
-)
-borrowButton.Click.Add(fun _ ->
-    borrowBook titleInput.Text borrowerInput.Text
-    displayBooks dataGridView
-)
-returnButton.Click.Add(fun _ ->
-    returnBook titleInput.Text
-    displayBooks dataGridView
-)
-searchButton.Click.Add(fun _ -> searchBook searchInput.Text)
-deleteButton.Click.Add(fun _ ->
-    deleteBook titleInput.Text
-    displayBooks dataGridView
-)
 
 // Add UI Elements to the Form
 form.Controls.AddRange(
